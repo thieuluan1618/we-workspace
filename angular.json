@@ -67,10 +67,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "we-workspace:build:production"
+              "buildTarget": "we-workspace:build:production"
             },
             "development": {
-              "browserTarget": "we-workspace:build:development",
+              "buildTarget": "we-workspace:build:development",
             }
           },
           "defaultConfiguration": "development"
@@ -79,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "we-workspace:build"
+            "buildTarget": "we-workspace:build"
           }
         },
         "test": {
