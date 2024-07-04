@@ -7,7 +7,9 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "scss",
+          "changeDetection": "Default",
+          "skipTests": true
         }
       },
       "root": "",
@@ -68,10 +70,11 @@
               "browserTarget": "we-workspace:build:production"
             },
             "development": {
-              "browserTarget": "we-workspace:build:development"
+              "browserTarget": "we-workspace:build:development",
             }
           },
           "defaultConfiguration": "development"
+
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -96,6 +99,39 @@
               "src/styles.scss"
             ],
             "scripts": []
+          }
+        }
+      }
+    },
+    "ngtl-common": {
+      "projectType": "library",
+      "root": "projects/ngtl-common",
+      "sourceRoot": "projects/ngtl-common/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngtl-common/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngtl-common/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngtl-common/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/ngtl-common/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
           }
         }
       }
