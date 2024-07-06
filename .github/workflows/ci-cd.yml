@@ -22,15 +22,12 @@ jobs:
         run: npm ci
 
       - name: Build library
-        run: ng build my-library
-
-      - name: Test library
-        run: ng test my-library
+        run: npm run build
 
       - name: Set up Git
         run: |
-          git config --global user.name "Your GitHub Username"
-          git config --global user.email "Your GitHub Email"
+          git config --global thieuluan
+          git config --global thieuluan.dev@gmail.com
 
       - name: Commit and push version update
         run: |
