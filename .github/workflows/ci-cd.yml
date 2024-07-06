@@ -1,0 +1,45 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build library
+        run: ng build my-library
+
+      - name: Test library
+        run: ng test my-library
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "Your GitHub Username"
+          git config --global user.email "Your GitHub Email"
+
+      - name: Commit and push version update
+        run: |
+          npm version patch -m "Bump version to %s [skip ci]"
+          git push --follow-tags
+
+      - name: Publish to NPM
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+        run: |
+          echo "//registry.npmjs.org/:_authToken=\${NODE_AUTH_TOKEN}" > .npmrc
+          npm publish

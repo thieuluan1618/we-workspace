@@ -8,9 +8,10 @@
     "watch": "ng build ngtl-common --watch --configuration development",
     "pack": "cd dist/ngtl-common & npm pack",
     "publish": "npm run build & cd dist/ngtl-common & npm publish",
+    "unpublish": "npm unpublish ngtl-common -f",
     "test": "ng test"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@angular/animations": "^17.3.11",
     "@angular/common": "^17.3.11",
